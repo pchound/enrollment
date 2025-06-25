@@ -49,3 +49,18 @@ def api(idx=None):
         status=200,
         mimetype="application/json"
     )
+
+class User(db.Document):
+    user_id     =       db.IntField(unique=True)
+    first_name  =       db.StringField(max_length=50)
+    last_name   =       db.StringField(max_length=50)
+    email       =       db.StringField(max_length=30)
+    password    =       db.StringField(max_length=30)
+
+@app.route("/user")
+def user():
+    User(user_id=1, first_name="Joseph", last_name="Garner" email="joedude1994@gmail.com", passwords="abc1234")
+    User(user_id=1, first_name="PC", last_name="Hound" email="chaonerdguy@gmail.com", passwords="yourface")
+    
+    users = User.objects.all()
+    return render_template("user.html", users=users)
